@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS financial_entries (
   organization_id uuid NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
   entry_type text NOT NULL CHECK (entry_type IN ('receivable', 'payable')),
   status text NOT NULL DEFAULT 'pending'
-    CHECK (status IN ('pending', 'partial', 'paid', 'void')),
+    CHECK (status IN ('pending', 'paid', 'void')),
   customer_id uuid,
   supplier_id uuid,
   sales_order_id uuid,
