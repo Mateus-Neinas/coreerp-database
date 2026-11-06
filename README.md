@@ -20,10 +20,10 @@ Este repositório define a estrutura e os scripts de criação do banco. **A API
 
 ## Aplicar localmente
 
-Requer PostgreSQL instalado e `psql` disponível. Crie um banco vazio:
+Requer PostgreSQL instalado e `psql` disponível. Crie o banco vazio:
 
 ```bash
-createdb coreerp
+psql -v ON_ERROR_STOP=1 -d postgres -f database/000_create_database.sql
 psql -v ON_ERROR_STOP=1 -d coreerp -f database/001_initial_schema.sql
 psql -v ON_ERROR_STOP=1 -d coreerp -f database/002_stock_ledger.sql
 ```
