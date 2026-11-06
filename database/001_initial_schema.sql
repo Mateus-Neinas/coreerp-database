@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS stock_movements (
   FOREIGN KEY (organization_id, product_id)
     REFERENCES products (organization_id, id) ON DELETE RESTRICT,
   FOREIGN KEY (organization_id, created_by_user_id)
-    REFERENCES organization_members (organization_id, user_id) ON DELETE SET NULL
+    REFERENCES organization_members (organization_id, user_id) ON DELETE RESTRICT
 );
 CREATE INDEX IF NOT EXISTS stock_movements_org_product_date_idx
   ON stock_movements (organization_id, product_id, created_at DESC);
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS sales_orders (
   FOREIGN KEY (organization_id, customer_id)
     REFERENCES customers (organization_id, id) ON DELETE RESTRICT,
   FOREIGN KEY (organization_id, created_by_user_id)
-    REFERENCES organization_members (organization_id, user_id) ON DELETE SET NULL
+    REFERENCES organization_members (organization_id, user_id) ON DELETE RESTRICT
 );
 CREATE INDEX IF NOT EXISTS sales_orders_org_status_date_idx
   ON sales_orders (organization_id, status, created_at DESC);
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS purchase_orders (
   FOREIGN KEY (organization_id, supplier_id)
     REFERENCES suppliers (organization_id, id) ON DELETE RESTRICT,
   FOREIGN KEY (organization_id, created_by_user_id)
-    REFERENCES organization_members (organization_id, user_id) ON DELETE SET NULL
+    REFERENCES organization_members (organization_id, user_id) ON DELETE RESTRICT
 );
 CREATE INDEX IF NOT EXISTS purchase_orders_org_status_date_idx
   ON purchase_orders (organization_id, status, created_at DESC);
@@ -224,9 +224,9 @@ CREATE TABLE IF NOT EXISTS financial_entries (
   FOREIGN KEY (organization_id, supplier_id)
     REFERENCES suppliers (organization_id, id) ON DELETE RESTRICT,
   FOREIGN KEY (organization_id, sales_order_id)
-    REFERENCES sales_orders (organization_id, id) ON DELETE SET NULL,
+    REFERENCES sales_orders (organization_id, id) ON DELETE RESTRICT,
   FOREIGN KEY (organization_id, purchase_order_id)
-    REFERENCES purchase_orders (organization_id, id) ON DELETE SET NULL
+    REFERENCES purchase_orders (organization_id, id) ON DELETE RESTRICT
 );
 CREATE INDEX IF NOT EXISTS financial_entries_org_type_status_due_idx
   ON financial_entries (organization_id, entry_type, status, due_on);
